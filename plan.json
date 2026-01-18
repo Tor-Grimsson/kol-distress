@@ -1,0 +1,153 @@
+{
+  "objective": "Match refine UI to the provided screenshot reference with simplified black/white styling and consistent controls.",
+  "preview_plane": {
+    "layout": {
+      "viewport": "Full-screen canvas occupies 100vw × 100vh with no left sidebar.",
+      "stacking": "Grid sits at the lowest layer, then preview header/controls, then SVG scene, then overlay controls/info cards.",
+      "controls_relationship": "Right sidebar overlays the preview using absolute/fixed positioning and does not shrink the preview canvas."
+    },
+    "positioning": {
+      "origin": "Crosshair centered on (0,0) within the SVG viewBox.",
+      "shape_alignment": "Shape centered on origin; zoom scales around origin.",
+      "header": "Preview header row sits within the preview frame, above the canvas but still over the grid."
+    }
+  },
+  "components": {
+    "toggles": "ToggleCheckbox (single toggle style for Visualization, Bezier Mirroring, Handle Link Edit).",
+    "sliders": "Slider (variant='minimal') for all numeric controls.",
+    "inputs": "Input for hex/number fields (no custom wrappers).",
+    "buttons": "ControlButton for overlay actions; Button (variant='outline') only if required by reference.",
+    "icons": "Icon from src/components/icons/Icon.jsx per docs/3.2.0-icons.md"
+  },
+  "sidebar_reference": {
+    "source": "a-ref/kolkrabbi-radial",
+    "sidebar_container": {
+      "layout": "absolute top-0 right-0 h-full p-8 z-20 pointer-events-auto",
+      "width": "400px",
+      "background": "#121215",
+      "border": "1px solid var(--kol-border-default)",
+      "border_radius": "4px",
+      "gap": "8px-16px section spacing",
+      "reference_component": "a-ref/kolkrabbi-radial/src/radial/apparatus/WavyCircleControls.jsx"
+    },
+    "typography": {
+      "control_heading_class": "control-heading",
+      "control_heading_css": {
+        "font_family": "var(--kol-font-family-mono)",
+        "font_weight": 470,
+        "font_size": "clamp(10px, 0.8vw, 14px)",
+        "line_height": "120%",
+        "text_transform": "uppercase (to be overridden to Sentence case for this task)",
+        "letter_spacing": "0.08em",
+        "color": "var(--kol-surface-on-primary)"
+      },
+      "control_label_class": "control-label",
+      "control_label_css": "same as control-heading"
+    },
+    "controls": {
+      "sliders": {
+        "component": "Slider (variant='minimal')",
+        "class": "control-slider-minimal",
+        "css": {
+          "display": "inline-flex",
+          "flex_direction": "row",
+          "align_items": "center",
+          "padding": "0",
+          "border_radius": "0",
+          "background": "transparent",
+          "border": "none"
+        }
+      },
+      "buttons": {
+        "component": "ControlButton / Button variant='outline'",
+        "btn_control_css": {
+          "padding": "8px 16px",
+          "border_radius": "4px",
+          "background": "var(--kol-surface-on-primary)",
+          "color": "var(--kol-surface-primary)",
+          "border": "1px solid transparent"
+        }
+      },
+      "toggles": {
+        "component": "ToggleCheckbox (single toggle style only)",
+        "indicator_size": "16px",
+        "radius": "3px",
+        "border": "1px solid color-mix(in srgb, var(--kol-surface-on-primary) 25%, transparent)",
+        "active_fill": "var(--kol-surface-on-primary)",
+        "active_check": "var(--kol-surface-primary)"
+      },
+      "colors": {
+        "panel_background": "#121215",
+        "text_primary": "var(--kol-surface-on-primary)",
+        "text_muted": "color-mix(in srgb, var(--kol-surface-on-primary) 64%, transparent)",
+        "borders": "color-mix(in srgb, var(--kol-surface-on-primary) 8%, transparent)"
+      }
+    }
+  },
+  "constraints": {
+    "layout": [
+      "Remove left sidebar entirely.",
+      "Preview canvas occupies full viewport (100vh/100vw).",
+      "Right sidebar overlays the preview (not in layout flow)."
+    ],
+    "visuals": [
+      "Background color is #121215 (kol-surface-primary).",
+      "Grid matches kolkrabbi-radial implementation (spacing, opacity, placement under header/controls).",
+      "Crosshair styling and position aligned to the shape origin as in the reference.",
+      "No rounded corners greater than 4px.",
+      "No uppercase labels; use Sentence case.",
+      "Black/white only (no yellow/CTA colors)."
+    ],
+    "controls": [
+      "No extra slider containers; keep controls minimal and flat.",
+      "Use one consistent control style (ToggleCheckbox) for Visualization, Bezier Mirroring, and Handle Link Edit.",
+      "Remove mixed toggle/button styles; single toggle style only.",
+      "Match slider styling, input fields, and toggle style to the reference."
+    ],
+    "verification": [
+      "Use Playwright to A/B compare against a-ref/img/image copy 8.png and refine spacing/alignment.",
+      "Verify grid sits under controls and preview occupies full viewport."
+    ]
+  },
+  "steps": {
+    "1": {
+      "task": "Study reference implementation",
+      "actions": [
+        "Read kolkrabbi-radial grid/crosshair implementation and mirror it in refine view.",
+        "Open a-ref/img/image copy 8.png for exact layout/spacing reference."
+      ]
+    },
+    "2": {
+      "task": "Layout refactor",
+      "actions": [
+        "Remove left sidebar from RefinePage layout.",
+        "Make preview container full viewport and ensure grid sits behind header/controls.",
+        "Move right sidebar into overlay position with fixed/absolute placement."
+      ]
+    },
+    "3": {
+      "task": "Control styling normalization",
+      "actions": [
+        "Replace mixed toggle/button types with a single toggle style used everywhere.",
+        "Convert labels to Sentence case and remove uppercase classes.",
+        "Remove extra slider wrappers/containers and keep minimal control rows.",
+        "Ensure all radii are 4px max and colors are black/white only."
+      ]
+    },
+    "4": {
+      "task": "Visual polish",
+      "actions": [
+        "Set background to #121215 and align crosshair/shape positioning.",
+        "Match slider track/thumb and input styles to reference.",
+        "Confirm grid spacing/opacity and placement match kolkrabbi-radial."
+      ]
+    },
+    "5": {
+      "task": "Verification",
+      "actions": [
+        "Use Playwright to compare the current UI against a-ref/img/image copy 8.png.",
+        "Iterate spacing/alignment until the view matches the reference."
+      ]
+    }
+  }
+}

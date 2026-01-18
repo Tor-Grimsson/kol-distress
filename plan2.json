@@ -1,0 +1,98 @@
+{
+  "objective": "Match refine view to kolkrabbi-radial reference exactly (layout, controls, icons, grid, and bottom-left block) with full-viewport preview and right sidebar overlay.",
+  "research_needed": [
+    "a-ref/kolkrabbi-radial/src/radial/apparatus/WavyCircleEditor.jsx (icon stack placement, bottom-left info card, button sizing)",
+    "a-ref/kolkrabbi-radial/src/radial/apparatus/WavyCircleCanvas.jsx (grid/crosshair rendering, zoom/pan, cursor behavior)",
+    "a-ref/kolkrabbi-radial/src/radial/apparatus/WavyCircleControls.jsx (sidebar layout, uppercase headings, slider and toggle usage)",
+    "a-ref/kolkrabbi-radial/src/index.css (control-heading, border-fg-08, toggle styling, mono label sizes)",
+    "docs/3.2.0-icons.md and src/components/icons/Icon.jsx (icon loader usage + folder paths)",
+    "a-ref/img/image copy 8.png + a-ref/img/image copy 9.png (visual target for AB check)"
+  ],
+  "sidebar_css": {
+    "container": "width: 400px; padding: 16px; border: 1px solid var(--kol-border-default) (border-auto); border-radius: 4px; background: #121215; gap: 32px;",
+    "heading": "class control-heading (uppercase, mono, tracking, clamp(10px,0.8vw,14px))",
+    "labels": "kol-mono-xs or kol-mono-xxs with uppercase tracking",
+    "controls": "Slider variant=minimal; ToggleCheckbox for all toggles; no extra wrapper cards;",
+    "color_block": "at bottom of sidebar; inline layout; swatch + hex like kolkrabbi-radial"
+  },
+  "preview_plane": {
+    "layout": "full viewport (100vh/100vw) preview plane; right sidebar overlayed absolute top-right with p-4; no left sidebar panel",
+    "grid": "quadrant grid background (4 quadrants) + crosshair axes at center; opacity reduced; zoom scales grid spacing",
+    "icons": "left icon stack absolute top-left (p-4) using icon-only buttons; border-fg-08; bg #121215; 4px radius"
+  },
+  "components": {
+    "icons": "src/components/icons/Icon.jsx with folder paths like 'active/ui' or 'library'",
+    "toggles": "src/components/atoms/ToggleCheckbox.jsx only",
+    "sliders": "src/components/atoms/Slider.jsx variant=\"minimal\"",
+    "buttons": "src/components/atoms/Button.jsx variant=\"outline\" size=\"sm\"",
+    "inputs": "src/components/atoms/Input.jsx with 4px radius"
+  },
+  "steps": {
+    "1": {
+      "task": "Bottom-left block exact match",
+      "actions": [
+        "Match bottom-left stats card structure (Nodes / Control points / Optimality) with kolkrabbi-radial styles.",
+        "Match button row (Download SVG, Copy Path) sizing, spacing, border-fg-08, and background #121215.",
+        "Ensure mono labels use uppercase tracking and 4px radius only."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 4
+    },
+    "2": {
+      "task": "Left action stack + zoom placement",
+      "actions": [
+        "Style the left action stack like the reference (48px icon buttons, border-fg-08, #121215 background, 4px radius).",
+        "Move zoom +/- buttons below undo/redo so they stay clear of the sidebar.",
+        "Apply p-4 spacing to overlay positions (top-left, bottom-left, right sidebar wrapper)."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 4
+    },
+    "3": {
+      "task": "Right sidebar controls + mirroring layout",
+      "actions": [
+        "Keep uppercase headings and border-fg-08 on the sidebar, with p-4 padding.",
+        "Make 'Mirror angle + length' span two columns (two-line flow).",
+        "Ensure slider numeric inputs match reference borders (border-fg-08, 4px radius, #121215 background)."
+      ],
+      "timebox_minutes": 25,
+      "status": "completed",
+      "self_rating": 4
+    },
+    "4": {
+      "task": "Color controls placement + styling",
+      "actions": [
+        "Move color controls to the bottom of the right sidebar (kolkrabbi-radial layout).",
+        "Match PATH COLOR / FILL COLOR swatch + hex layout from reference image.",
+        "Use same swatch style with disabled slash and keep popover picker minimal."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 4
+    },
+    "5": {
+      "task": "Preview plane + grid/crosshair alignment",
+      "actions": [
+        "Ensure crosshair axes are effectively infinite (no visible ends when zoomed out).",
+        "Match grid opacity and quadrant scaling to WavyCircleCanvas.",
+        "Verify full-viewport preview with centered content and correct cursor state."
+      ],
+      "timebox_minutes": 30,
+      "status": "completed",
+      "self_rating": 3
+    },
+    "6": {
+      "task": "Playwright AB verification + distortion view parity",
+      "actions": [
+        "Open refine view and compare against a-ref/img/image copy 8.png (and copy 9.png for bottom-left).",
+        "Update MainPage layout padding to match refine (p-4 spacing).",
+        "Capture snapshot + report differences if any remain."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 3
+    }
+  }
+}

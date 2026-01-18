@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>SVG Edge Distorter</title>
+<style>
+  body { font-family: system-ui; background:#111; color:#eee; margin:0; display:flex; }
+  #ui { width:280px; padding:16px; background:#1b1b1b; }
+  label { display:block; margin-top:12px; font-size:12px; }
+  input, button { width:100%; margin-top:6px; }
+  button { padding:8px; background:#333; color:#eee; border:none; cursor:pointer; }
+  button.active { background:#555; }
+  canvas { flex:1; background:#222; }
+</style>
+</head>
+<body>
+
+<div id="ui">
+  <input type="file" id="upload" accept=".svg" />
+
+  <label>Mode</label>
+  <button onclick="setMode('jitter')">Jitter</button>
+  <button onclick="setMode('noise')">Noise</button>
+  <button onclick="setMode('hand')">Hand-drawn</button>
+
+  <label>Amount</label>
+  <input type="range" min="0" max="50" value="10" id="amount">
+
+  <label>Frequency</label>
+  <input type="range" min="1" max="50" value="10" id="freq">
+
+  <label>Smoothness</label>
+  <input type="range" min="0" max="100" value="50" id="smooth">
+
+  <label>Seed</label>
+  <input type="range" min="0" max="1000" value="1" id="seed">
+
+  <button onclick="toggle()">Toggle Original</button>
+  <button onclick="exportSVG()">Export SVG</button>
+</div>
+
+<canvas id="canvas" resize></canvas>
+
+<script src="https://unpkg.com/paper@0.12.15/dist/paper-full.min.js"></script>
+<script>
+paper.setup(canvas);
+
+let originalPath, distortedPath;
+let mode = 'jitter';
+let showOriginal = false;
+
+function setMode(m) {
+  mode = m;
+  apply();
+}
+
+function rand(seed) {
+  return Math.sin(seed) * 10000 % 1;
+}
+
+document.querySelectorAll('input').forEach(i => i.oninput = apply);
+
+document.getElementById('upload').onchange = e => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = ev => {
+    paper.project.clear();
+    paper.project.importSVG(ev.target.result, item => {
+      originalPath = item.children ? item.children[0] : item;
+      originalPath.flatten(2);
+      distortedPath = originalPath.clone();
+      apply();
+    });
+  };
+  reader.readAsText(file);
+};
+
+function apply() {
+  if (!originalPath) return;
+  distortedPath.remove();
+  distortedPath = originalPath.clone();
+
+  const amt = +amount.value;
+  const freq = +freq.value;
+  const smooth = +smooth.value / 100;
+  const seed = +seed.value;
+
+  distortedPath.segments.forEach((seg, i) => {
+    let n = (i / freq) + seed;
+    let dx = 0, dy = 0;
+
+    if (mode === 'jitter') {
+      dx = (Math.random() - 0.5) * amt;
+      dy = (Math.random() - 0.5) * amt;
+    }
+
+    if (mode === 'noise') {
+      dx = Math.sin(n * 10) * amt;
+      dy = Math.cos(n * 10) * amt;
+    }
+
+    if (mode === 'hand') {
+      dx = Math.sin(n * 6) * amt * 0.7;
+      dy = Math.sin(n * 9) * amt * 0.7;
+    }
+
+    seg.point.x += dx;
+    seg.point.y += dy;
+  });
+
+  distortedPath.smooth({ type:'continuous', factor:smooth });
+
+  originalPath.visible = showOriginal;
+  distortedPath.visible = !showOriginal;
+}
+
+function toggle() {
+  showOriginal = !showOriginal;
+  apply();
+}
+
+function exportSVG() {
+  const svg = paper.project.exportSVG({ asString:true });
+  const blob = new Blob([svg], { type:'image/svg+xml' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'distorted.svg';
+  a.click();
+}
+</script>
+</body>
+</html>

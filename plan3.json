@@ -1,0 +1,139 @@
+{
+  "objective": "Match kolkrabbi-radial visuals across refine + distortion views, including color picker layout, sidebar spacing, typography consistency, buttons, grid/crosshair behavior, and grid density.",
+  "rating_directive": "After each step, provide a self-rating with a brief reason that includes what did not work or what remains incomplete.",
+  "requirements": [
+    "Restore color picker hex + opacity slider and keep color block at bottom of sidebar.",
+    "Sidebar margins/padding must match kolkrabbi-radial; unify text styles and colors.",
+    "Buttons must match kolkrabbi-radial button styles (no ad-hoc variants).",
+    "Top-left icon buttons reveal text on hover.",
+    "Crosshair/grid must match kolkrabbi-radial (infinite axes, correct opacity).",
+    "Grid density must be reduced (divide grid spacing) so it is not too tight.",
+    "Remove the 'Node editing only...' helper text.",
+    "Apply the same fixes to the distortion view UI."
+  ],
+  "steps": {
+    "1": {
+      "task": "Distortion: sidebar spacing + typography consistency",
+      "actions": [
+        "Match distortion sidebar padding/margins to kolkrabbi-radial.",
+        "Normalize text sizes/colors to a single consistent scheme.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Text styles are more consistent but the primary heading and tag colors still mix multiple weights/colors; full uniformity is pending later steps."
+    },
+    "2": {
+      "task": "Distortion: buttons + inputs",
+      "actions": [
+        "Align button styles to kolkrabbi-radial buttons (no ad-hoc variants).",
+        "Align input borders/rounding to the reference.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Buttons now use the shared Button component and numeric inputs use 4px radius + border-fg-08, but the file upload styling still uses the native file button and may not match the reference."
+    },
+    "3": {
+      "task": "Distortion: grid/crosshair parity",
+      "actions": [
+        "Match grid density and opacity to refine view/kolkrabbi-radial.",
+        "Ensure crosshair rendering is consistent with refine view.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Grid spacing was loosened and crosshair color aligned, but exact opacity and axis weight may still differ from the reference until refine grid is updated."
+    },
+    "4": {
+      "task": "Distortion: color block placement",
+      "actions": [
+        "Move color-related controls (if any) to the bottom like refine.",
+        "Match PATH/FILL layout style where applicable.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 2,
+      "self_rating_reason": "No color controls exist in the distortion view yet, so there was nothing to align; this remains blocked until color controls are introduced."
+    },
+    "5": {
+      "task": "Distortion: preview + panel padding parity",
+      "actions": [
+        "Ensure preview frame padding and layout match refine (p-4 spacing).",
+        "Confirm layout aligns with kolkrabbi-radial expectations.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Panel padding is now p-4, but overall layout still diverges from kolkrabbi-radial because this view keeps its three-column layout and lacks icon stacks."
+    },
+    "6": {
+      "task": "Distortion: final Playwright validation",
+      "actions": [
+        "Verify distortion view against the same style rules as refine.",
+        "Capture diffs and self-rate each step."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 2,
+      "self_rating_reason": "Playwright confirms changes applied, but the distortion view still lacks the full kolkrabbi-radial UI structure (icon stack, color controls), so parity is incomplete."
+    },
+    "7": {
+      "task": "Refine: restore color block + opacity/hex and move to bottom",
+      "actions": [
+        "Reintroduce hex + opacity controls in the color picker.",
+        "Ensure PATH COLOR / FILL COLOR match kolkrabbi-radial layout at the bottom of the sidebar.",
+        "Keep swatch + hex inline and use correct text styles.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 25,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Hex + opacity controls were restored in the popovers, but the snapshot shows only the swatch+hex row until the picker is opened; need user confirmation on popover layout."
+    },
+    "8": {
+      "task": "Refine: sidebar spacing + typography + button styles",
+      "actions": [
+        "Match sidebar padding/margins to kolkrabbi-radial.",
+        "Normalize text sizes/colors to a single consistent scheme.",
+        "Replace mismatched buttons with kolkrabbi-radial button styles.",
+        "Add hover-reveal labels for the top-left icon buttons.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 25,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Hover labels are in place and sidebar padding matches the reference, but icon buttons still show action icons instead of the shape stack shown in the reference."
+    },
+    "9": {
+      "task": "Refine: grid + crosshair corrections",
+      "actions": [
+        "Match crosshair rendering to kolkrabbi-radial (infinite axes, correct opacity).",
+        "Reduce grid density by increasing spacing (divide grid).",
+        "Ensure handles/segments render cleanly per reference.",
+        "Review with Playwright."
+      ],
+      "timebox_minutes": 30,
+      "status": "completed",
+      "self_rating": 3,
+      "self_rating_reason": "Grid spacing was increased and axes now use var(--kol-border-strong), plus the extra handle line was removed. Still need to verify exact opacity and grid quadrant behavior against the reference."
+    },
+    "10": {
+      "task": "Playwright validation",
+      "actions": [
+        "Verify refine view against kolkrabbi-radial references.",
+        "Verify distortion view against the same style rules.",
+        "Capture diffs and self-rate each step."
+      ],
+      "timebox_minutes": 20,
+      "status": "completed",
+      "self_rating": 2,
+      "self_rating_reason": "Both views render, but refine still differs from the reference (icon stack content, grid opacity, and sidebar margin expectations), and distortion view still lacks color controls and icon stack parity."
+    }
+  }
+}

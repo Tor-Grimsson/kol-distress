@@ -1,0 +1,71 @@
+{
+  "objective": "Match kolkrabbi-radial reference for refine + distortion, with identical button styles, full-screen grid, and consistent layout/typography.",
+  "steps": {
+    "1": {
+      "task": "Refine: top-left button stack exact styling",
+      "actions": [
+        "Use the exact button class and 24x24 SVGs as specified.",
+        "Verify hover labels and active state styling.",
+        "Review with Playwright."
+      ],
+      "status": "pending",
+      "self_rating": null,
+      "self_rating_reason": null
+    },
+    "2": {
+      "task": "Refine: grid + crosshair parity",
+      "actions": [
+        "Match grid spacing and opacity to kolkrabbi-radial.",
+        "Ensure crosshair axes are infinite and correct stroke.",
+        "Review with Playwright."
+      ],
+      "status": "pending",
+      "self_rating": null,
+      "self_rating_reason": null
+    },
+    "3": {
+      "task": "Refine: sidebar + color block parity",
+      "actions": [
+        "Keep color block at bottom with hex + opacity.",
+        "Normalize text styles and remove extra helper text.",
+        "Review with Playwright."
+      ],
+      "status": "pending",
+      "self_rating": null,
+      "self_rating_reason": null
+    },
+    "4": {
+      "task": "Distortion: layout parity with refine",
+      "actions": [
+        "Use same full-screen grid/crosshair background.",
+        "Keep preview behind and panels overlayed with identical padding.",
+        "Review with Playwright."
+      ],
+      "status": "pending",
+      "self_rating": null,
+      "self_rating_reason": null
+    },
+    "5": {
+      "task": "Distortion: panel styling + buttons",
+      "actions": [
+        "Apply consistent typography and button styles.",
+        "Align input borders/rounding to reference.",
+        "Review with Playwright."
+      ],
+      "status": "pending",
+      "self_rating": null,
+      "self_rating_reason": null
+    },
+    "6": {
+      "task": "Final Playwright verification",
+      "actions": [
+        "Compare refine view against reference.",
+        "Compare distortion view against refine for parity.",
+        "Update ratings + reasons."
+      ],
+      "status": "pending",
+      "self_rating": null,
+      "self_rating_reason": null
+    }
+  }
+}
